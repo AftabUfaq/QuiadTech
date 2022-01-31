@@ -17,10 +17,12 @@ const App = () => {
   ])
 
     useEffect(() => {
+      // every time current is change we wil upadte UI
       changeUsDollarToSelectedCurrency(value_in_us_dollars)
     },[exchnagecurrency])
 
     const changeUsDollarToSelectedCurrency = (value) => {
+      // get seletec item for the array
       let data =  exchangedata.find((element) => {
           return element.name === currency;
       })  
@@ -45,32 +47,31 @@ const App = () => {
                 }} 
                 mt={2} 
                 onValueChange={(itemValue) => selectedCurrency(itemValue)}>
-                  {
-                  exchangedata.map((item, index) => {
-                    return(
-                      <Select.Item key={`${index}`} label={item.name} value={item.name} />
-                    )
-                  })
-                }
-                
-          </Select>
-          <View style={styles.container} >
-              <View style={styles.box}>
-                <TextInput 
-                  keyboardType={"number-pad"}
-                  style={styles.textInput} 
-                  value={value_in_us_dollars}
-                  placeholder='Please Enter value'
-                  onChangeText={(text) => changeUsDollarToSelectedCurrency(text)}
-                />
-              <Text style={styles.text} >US  Dollar (USD)</Text>
-              </View>
-              <View style={styles.box}>
-                  <Text style={{height:80, fontSize:28,fontWeight:"bold"}} >{parseFloat(exchnagecurrency).toFixed(2)}</Text>
-                  <Text style={styles.text}>{currency}</Text>
-              </View>
-          </View>
-      </View>
+                {
+                    exchangedata.map((item, index) => {
+                      return(
+                        <Select.Item key={`${index}`} label={item.name} value={item.name} />
+                      )
+                    })
+                }      
+            </Select>
+            <View style={styles.container} >
+                <View style={styles.box}>
+                  <TextInput 
+                    keyboardType={"number-pad"}
+                    style={styles.textInput} 
+                    value={value_in_us_dollars}
+                    placeholder='Please Enter value'
+                    onChangeText={(text) => changeUsDollarToSelectedCurrency(text)}
+                  />
+                  <Text style={styles.text} >US  Dollar (USD)</Text>
+                </View>
+                <View style={styles.box}>
+                    <Text style={{height:80, fontSize:28,fontWeight:"bold"}} >{parseFloat(exchnagecurrency).toFixed(2)}</Text>
+                    <Text style={styles.text}>{currency}</Text>
+                </View>
+            </View>
+        </View>
     </NativeBaseProvider>
   );
 };
